@@ -1,10 +1,18 @@
-docker build -t helloworld .    
-docker tag helloworld asia.gcr.io/poc-innovation-iot/helloworld
-docker push asia.gcr.io/poc-innovation-iot/helloworld 
+docker build -t helloworld-champ .    
+docker tag helloworld-champ asia.gcr.io/poc-innovation-iot/helloworld-champ
+docker push asia.gcr.io/poc-innovation-iot/helloworld-champ 
 
 connect to Cluster
 
 kubectl create namespace ice 
 
 kubectl exec -it turbo-nginx-5b89ff96-wk974 -n turbo-poc  bash      
-curl --location --request GET 'http://helloworld.ice:8080/'
+curl --location --request GET 'http://helloworld-champ.ice:8080/'
+
+
+
+
+
+cd
+
+argocd app create example-service-champ --repo https://github.com/PeerasateK/kustomize-helloworld.git --path ./ --dest-server https://34.142.207.252 --dest-namespace training-champ
